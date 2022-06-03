@@ -1,3 +1,7 @@
+# upate this if you to autoload .env file values
+
+set dotenv-load := false
+
 @_default:
     just --list
 
@@ -12,6 +16,10 @@
 # opens a console
 @console:
     echo "TODO: console"
+
+# format and overwrite justfile
+@fmt:
+    just --fmt --unstable
 
 # starts app
 @server:
