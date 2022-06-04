@@ -24,6 +24,6 @@ jobs:
           # this is not required but add it if you get any rate limiting issues
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - run: just
+      - run: just --check --fmt --unstable
       - run: just --list
       - run: just --summary
