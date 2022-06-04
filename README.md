@@ -2,7 +2,7 @@
 
 This is a WIP repo to form some opinions on my own version of "[Scripts To Rule Them All][Scripts to Rule Them All]" standard for my projects.
 
-I'm using [just][casey/just] of Make or external files because it fits my brain better. 
+I'm using [just][casey/just] instead of Make or external files because it fits my brain better. 
 It also allows me to avoid make vs. gmake differences. 
 
 ## Usage
