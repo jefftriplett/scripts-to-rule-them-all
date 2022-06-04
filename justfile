@@ -13,6 +13,10 @@ set dotenv-load := false
 @cibuild:
     echo "TODO: cibuild"
 
+# run '--fmt' in "check" mode.
+@check:
+    just --check --fmt --unstable
+
 # opens a console
 @console:
     echo "TODO: console"
