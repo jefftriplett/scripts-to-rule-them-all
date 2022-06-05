@@ -6,13 +6,16 @@ I'm using [just][casey/just] instead of Make or external files because it fits m
 It also allows me to avoid make vs. gmake differences. 
 
 ## Usage
-
 <!-- [[[cog
 import cog
 import subprocess
 
-result = subprocess.check_output(["just", "--list"], stderr=subprocess.STDOUT)
-help = result.decode().strip()
+help = subprocess.run(
+    ["just", "--list"], 
+    stdout=subprocess.PIPE,
+    stderr=subprocess.PIPE,
+    encoding="utf-8",
+).stdout
 cog.outl("```shell")
 cog.outl("❯ just")
 cog.outl(f"{help}")
@@ -22,6 +25,7 @@ cog.outl("```")
 ❯ just
 Available recipes:
     bootstrap # installs/updates all dependencies
+    check     # run '--fmt' in "check" mode.
     cibuild   # invoked by continuous integration servers to run tests
     console   # opens a console
     fmt       # format and overwrite justfile
@@ -29,6 +33,7 @@ Available recipes:
     setup     # sets up a project to be used for the first time
     test      # runs tests
     update    # updates a project to run at its current version
+
 ```
 <!-- [[[end]]] -->
 
@@ -40,6 +45,12 @@ The summary view might be nice for linting or scripting to see what options are 
 <!-- [[[cog
 result = subprocess.check_output(["just", "--summary"], stderr=subprocess.STDOUT)
 help = result.decode().strip()
+help = subprocess.run(
+    ["just", "--summary"], 
+    stdout=subprocess.PIPE,
+    stderr=subprocess.PIPE,
+    encoding="utf-8",
+).stdout
 cog.outl("```shell")
 cog.outl("❯ just --summary")
 cog.outl(f"{help}")
@@ -47,7 +58,8 @@ cog.outl("```")
 ]]] -->
 ```shell
 ❯ just --summary
-bootstrap cibuild console fmt server setup test update
+bootstrap check cibuild console fmt server setup test update
+
 ```
 <!-- [[[end]]] -->
 
