@@ -27,3 +27,4 @@ jobs:
       - run: just check
       - run: just --list
       - run: just --summary
+      - run: just _cog_check_readme

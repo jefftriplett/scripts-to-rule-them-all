@@ -41,6 +41,10 @@ set dotenv-load := false
 @update:
     echo "TODO: update"
 
+# check/lint our README
+@_cog_check_readme:
+    pipx run --spec cogapp cog --check README.md
+
 # updates our README when justfile changes
-@_update_readme:
+@_cog_update_readme:
     pipx run --spec cogapp cog -r README.md
