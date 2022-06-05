@@ -37,14 +37,11 @@ Available recipes:
 ```
 <!-- [[[end]]] -->
 
-
 ### Summary view
 
 The summary view might be nice for linting or scripting to see what options are available with less parsing.
 
 <!-- [[[cog
-result = subprocess.check_output(["just", "--summary"], stderr=subprocess.STDOUT)
-help = result.decode().strip()
 help = subprocess.run(
     ["just", "--summary"], 
     stdout=subprocess.PIPE,
@@ -60,6 +57,84 @@ cog.outl("```")
 ❯ just --summary
 bootstrap check cibuild console fmt server setup test update
 
+```
+<!-- [[[end]]] -->
+
+## Recipes
+<!-- [[[cog
+help = subprocess.run(
+    ["just", "--summary"], 
+    stdout=subprocess.PIPE,
+    stderr=subprocess.PIPE,
+    encoding="utf-8",
+).stdout.strip()
+recipes = help.split(" ")
+for recipe in recipes:
+    recipe_help = subprocess.run(
+        ["just", "--show", f"{recipe}"], 
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        encoding="utf-8",
+    ).stdout.strip()
+    cog.outl(f"### {recipe}")
+    cog.outl("```shell")
+    cog.outl(f"{recipe_help}")
+    cog.out("```")
+    cog.outl()
+]]] -->
+### bootstrap
+```shell
+# installs/updates all dependencies
+@bootstrap:
+    echo "TODO: bootstrap"
+```
+### check
+```shell
+# run '--fmt' in "check" mode.
+@check:
+    just --check --fmt --unstable
+```
+### cibuild
+```shell
+# invoked by continuous integration servers to run tests
+@cibuild:
+    echo "TODO: cibuild"
+```
+### console
+```shell
+# opens a console
+@console:
+    echo "TODO: console"
+```
+### fmt
+```shell
+# format and overwrite justfile
+@fmt:
+    just --fmt --unstable
+```
+### server
+```shell
+# starts app
+@server:
+    echo "TODO: server"
+```
+### setup
+```shell
+# sets up a project to be used for the first time
+@setup:
+    echo "TODO: setup"
+```
+### test
+```shell
+# runs tests
+@test:
+    echo "TODO: test"
+```
+### update
+```shell
+# updates a project to run at its current version
+@update:
+    echo "TODO: update"
 ```
 <!-- [[[end]]] -->
 

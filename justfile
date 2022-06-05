@@ -40,3 +40,7 @@ set dotenv-load := false
 # updates a project to run at its current version
 @update:
     echo "TODO: update"
+
+# updates our README when justfile changes
+@_update_readme:
+    pipx run --spec cogapp cog -r README.md
