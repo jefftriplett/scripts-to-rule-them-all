@@ -85,7 +85,7 @@ for recipe in recipes:
     ).stdout.strip()
 
     cog.outl(
-        f"### {recipe}\n\n"
+        f"### {recipe} recipe\n\n"
         f"```shell\n"
         f"$ just {recipe}\n"
         f"```\n\n"
@@ -97,7 +97,7 @@ for recipe in recipes:
         f"</details>\n"
     )
 ]]] -->
-### bootstrap
+### bootstrap recipe
 
 ```shell
 $ just bootstrap
@@ -114,7 +114,7 @@ $ just bootstrap
 
 </details>
 
-### check
+### check recipe
 
 ```shell
 $ just check
@@ -131,7 +131,7 @@ $ just check
 
 </details>
 
-### cibuild
+### cibuild recipe
 
 ```shell
 $ just cibuild
@@ -148,7 +148,7 @@ $ just cibuild
 
 </details>
 
-### console
+### console recipe
 
 ```shell
 $ just console
@@ -165,7 +165,7 @@ $ just console
 
 </details>
 
-### fmt
+### fmt recipe
 
 ```shell
 $ just fmt
@@ -182,7 +182,7 @@ $ just fmt
 
 </details>
 
-### server
+### server recipe
 
 ```shell
 $ just server
@@ -199,7 +199,7 @@ $ just server
 
 </details>
 
-### setup
+### setup recipe
 
 ```shell
 $ just setup
@@ -216,7 +216,7 @@ $ just setup
 
 </details>
 
-### test
+### test recipe
 
 ```shell
 $ just test
@@ -233,7 +233,7 @@ $ just test
 
 </details>
 
-### update
+### update recipe
 
 ```shell
 $ just update
