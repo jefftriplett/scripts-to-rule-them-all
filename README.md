@@ -90,10 +90,10 @@ for recipe in recipes:
         f"$ just {recipe}\n"
         f"```\n\n"
         f"<details>\n"
-        f"<summary>output</summary>\n"
+        f"<summary>output</summary>\n\n"
         f"```shell\n"
         f"{recipe_help}\n"
-        f"```\n"
+        f"```\n\n"
         f"</details>\n"
     )
 ]]] -->
@@ -105,11 +105,13 @@ $ just bootstrap
 
 <details>
 <summary>output</summary>
+
 ```shell
 # installs/updates all dependencies
 @bootstrap:
     echo "TODO: bootstrap"
 ```
+
 </details>
 
 ### check
@@ -120,11 +122,13 @@ $ just check
 
 <details>
 <summary>output</summary>
+
 ```shell
 # run '--fmt' in "check" mode.
 @check:
     just --check --fmt --unstable
 ```
+
 </details>
 
 ### cibuild
@@ -135,11 +139,13 @@ $ just cibuild
 
 <details>
 <summary>output</summary>
+
 ```shell
 # invoked by continuous integration servers to run tests
 @cibuild:
     echo "TODO: cibuild"
 ```
+
 </details>
 
 ### console
@@ -150,11 +156,13 @@ $ just console
 
 <details>
 <summary>output</summary>
+
 ```shell
 # opens a console
 @console:
     echo "TODO: console"
 ```
+
 </details>
 
 ### fmt
@@ -165,11 +173,13 @@ $ just fmt
 
 <details>
 <summary>output</summary>
+
 ```shell
 # format and overwrite justfile
 @fmt:
     just --fmt --unstable
 ```
+
 </details>
 
 ### server
@@ -180,11 +190,13 @@ $ just server
 
 <details>
 <summary>output</summary>
+
 ```shell
 # starts app
 @server:
     echo "TODO: server"
 ```
+
 </details>
 
 ### setup
@@ -195,11 +207,13 @@ $ just setup
 
 <details>
 <summary>output</summary>
+
 ```shell
 # sets up a project to be used for the first time
 @setup:
     echo "TODO: setup"
 ```
+
 </details>
 
 ### test
@@ -210,11 +224,13 @@ $ just test
 
 <details>
 <summary>output</summary>
+
 ```shell
 # runs tests
 @test:
     echo "TODO: test"
 ```
+
 </details>
 
 ### update
@@ -225,11 +241,13 @@ $ just update
 
 <details>
 <summary>output</summary>
+
 ```shell
 # updates a project to run at its current version
 @update:
     echo "TODO: update"
 ```
+
 </details>
 
 <!-- [[[end]]] -->
