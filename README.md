@@ -16,10 +16,13 @@ help = subprocess.run(
     stderr=subprocess.PIPE,
     encoding="utf-8",
 ).stdout
-cog.outl("```shell")
-cog.outl("❯ just")
-cog.outl(f"{help}")
-cog.outl("```")
+
+cog.outl(
+    f"```shell\n"
+    f"❯ just\n"
+    f"{help}\n"
+    f"```"
+)
 ]]] -->
 ```shell
 ❯ just
@@ -48,10 +51,13 @@ help = subprocess.run(
     stderr=subprocess.PIPE,
     encoding="utf-8",
 ).stdout
-cog.outl("```shell")
-cog.outl("❯ just --summary")
-cog.outl(f"{help}")
-cog.outl("```")
+
+cog.outl(
+    f"```shell\n"
+    f"❯ just --summary\n"
+    f"{help}\n"
+    f"```"
+)
 ]]] -->
 ```shell
 ❯ just --summary
@@ -68,6 +74,7 @@ help = subprocess.run(
     stderr=subprocess.PIPE,
     encoding="utf-8",
 ).stdout.strip()
+
 recipes = help.split(" ")
 for recipe in recipes:
     recipe_help = subprocess.run(
@@ -76,66 +83,155 @@ for recipe in recipes:
         stderr=subprocess.PIPE,
         encoding="utf-8",
     ).stdout.strip()
-    cog.outl(f"### {recipe}")
-    cog.outl("```shell")
-    cog.outl(f"{recipe_help}")
-    cog.out("```")
-    cog.outl()
+
+    cog.outl(
+        f"### {recipe}\n\n"
+        f"```shell\n"
+        f"$ just {recipe}\n"
+        f"```\n\n"
+        f"<details>\n"
+        f"<summary>output</summary>\n"
+        f"```shell\n"
+        f"{recipe_help}\n"
+        f"```\n"
+        f"</details>\n"
+    )
 ]]] -->
 ### bootstrap
+
+```shell
+$ just bootstrap
+```
+
+<details>
+<summary>output</summary>
 ```shell
 # installs/updates all dependencies
 @bootstrap:
     echo "TODO: bootstrap"
 ```
+</details>
+
 ### check
+
+```shell
+$ just check
+```
+
+<details>
+<summary>output</summary>
 ```shell
 # run '--fmt' in "check" mode.
 @check:
     just --check --fmt --unstable
 ```
+</details>
+
 ### cibuild
+
+```shell
+$ just cibuild
+```
+
+<details>
+<summary>output</summary>
 ```shell
 # invoked by continuous integration servers to run tests
 @cibuild:
     echo "TODO: cibuild"
 ```
+</details>
+
 ### console
+
+```shell
+$ just console
+```
+
+<details>
+<summary>output</summary>
 ```shell
 # opens a console
 @console:
     echo "TODO: console"
 ```
+</details>
+
 ### fmt
+
+```shell
+$ just fmt
+```
+
+<details>
+<summary>output</summary>
 ```shell
 # format and overwrite justfile
 @fmt:
     just --fmt --unstable
 ```
+</details>
+
 ### server
+
+```shell
+$ just server
+```
+
+<details>
+<summary>output</summary>
 ```shell
 # starts app
 @server:
     echo "TODO: server"
 ```
+</details>
+
 ### setup
+
+```shell
+$ just setup
+```
+
+<details>
+<summary>output</summary>
 ```shell
 # sets up a project to be used for the first time
 @setup:
     echo "TODO: setup"
 ```
+</details>
+
 ### test
+
+```shell
+$ just test
+```
+
+<details>
+<summary>output</summary>
 ```shell
 # runs tests
 @test:
     echo "TODO: test"
 ```
+</details>
+
 ### update
+
+```shell
+$ just update
+```
+
+<details>
+<summary>output</summary>
 ```shell
 # updates a project to run at its current version
 @update:
     echo "TODO: update"
 ```
+</details>
+
 <!-- [[[end]]] -->
 
 ## Resources
