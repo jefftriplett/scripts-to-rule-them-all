@@ -2,12 +2,46 @@
 
 set dotenv-load := false
 
+# ------------------------------------------------------------
+#  Standard justfile recipes
+# ------------------------------------------------------------
+
 @_default:
     just --list
 
+# format and overwrite justfile
+@fmt:
+    just --fmt --unstable
+
+# ------------------------------------------------------------
+#  Scripts To Rule Them All recipes
+# ------------------------------------------------------------
+
 # installs/updates all dependencies
-@bootstrap:
-    echo "TODO: bootstrap"
+@bootstrap *ARGS:
+    #!/usr/bin/env bash
+
+    set -euo pipefail
+
+    # we use cogapp to update our README
+    pip install cogapp
+
+    # setup our project defaults if they exist
+    if [ ! -f ".env" ]; then
+        echo ".env created"
+        cp .env.example .env
+    fi
+
+    if [ ! -f "docker-compose.override.yml" ]; then
+        echo "docker-compose.override.yml created"
+        cp docker-compose.override.yml.example docker-compose.override.yml
+    fi
+
+    # [ ] uncomment if we are using Docker
+    # docker-compose {{ ARGS }} build --force-rm
+
+    # [ ] uncomment if we are using pre-commit
+    # python -m pip install --upgrade pre-commit
 
 # invoked by continuous integration servers to run tests
 @cibuild:
@@ -21,9 +55,9 @@ set dotenv-load := false
 @console:
     echo "TODO: console"
 
-# format and overwrite justfile
-@fmt:
-    just --fmt --unstable
+# check/lint our project
+@lint:
+    pipx run --spec cogapp cog --check README.md
 
 # starts app
 @server:
@@ -41,10 +75,10 @@ set dotenv-load := false
 @update:
     echo "TODO: update"
 
-# check/lint our README
-@_cog_check_readme:
-    pipx run --spec cogapp cog --check README.md
+# ------------------------------------------------------------
+#  Custom recipes for our project
+# ------------------------------------------------------------
 
 # updates our README when justfile changes
-@_cog_update_readme:
+@docs:
     pipx run --spec cogapp cog -r README.md

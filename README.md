@@ -27,15 +27,17 @@ cog.outl(
 ```shell
 ❯ just
 Available recipes:
-    bootstrap # installs/updates all dependencies
-    check     # run '--fmt' in "check" mode.
-    cibuild   # invoked by continuous integration servers to run tests
-    console   # opens a console
-    fmt       # format and overwrite justfile
-    server    # starts app
-    setup     # sets up a project to be used for the first time
-    test      # runs tests
-    update    # updates a project to run at its current version
+    bootstrap *ARGS # installs/updates all dependencies
+    check           # run '--fmt' in "check" mode.
+    cibuild         # invoked by continuous integration servers to run tests
+    console         # opens a console
+    docs            # updates our README when justfile changes
+    fmt             # format and overwrite justfile
+    lint            # check/lint our project
+    server          # starts app
+    setup           # sets up a project to be used for the first time
+    test            # runs tests
+    update          # updates a project to run at its current version
 
 ```
 <!-- [[[end]]] -->
@@ -61,7 +63,7 @@ cog.outl(
 ]]] -->
 ```shell
 ❯ just --summary
-bootstrap check cibuild console fmt server setup test update
+bootstrap check cibuild console docs fmt lint server setup test update
 
 ```
 <!-- [[[end]]] -->
@@ -90,7 +92,7 @@ for recipe in recipes:
         f"$ just {recipe}\n"
         f"```\n\n"
         f"<details>\n"
-        f"<summary>output</summary>\n\n"
+        f"<summary>source</summary>\n\n"
         f"```shell\n"
         f"{recipe_help}\n"
         f"```\n\n"
@@ -104,12 +106,34 @@ $ just bootstrap
 ```
 
 <details>
-<summary>output</summary>
+<summary>source</summary>
 
 ```shell
 # installs/updates all dependencies
-@bootstrap:
-    echo "TODO: bootstrap"
+@bootstrap *ARGS:
+    #!/usr/bin/env bash
+
+    set -euo pipefail
+
+    # we use cogapp to update our README
+    pip install cogapp
+
+    # setup our project defaults if they exist
+    if [ ! -f ".env" ]; then
+        echo ".env created"
+        cp .env.example .env
+    fi
+
+    if [ ! -f "docker-compose.override.yml" ]; then
+        echo "docker-compose.override.yml created"
+        cp docker-compose.override.yml.example docker-compose.override.yml
+    fi
+
+    # [ ] uncomment if we are using Docker
+    # docker-compose {{ ARGS }} build --force-rm
+
+    # [ ] uncomment if we are using pre-commit
+    # python -m pip install --upgrade pre-commit
 ```
 
 </details>
@@ -121,7 +145,7 @@ $ just check
 ```
 
 <details>
-<summary>output</summary>
+<summary>source</summary>
 
 ```shell
 # run '--fmt' in "check" mode.
@@ -138,7 +162,7 @@ $ just cibuild
 ```
 
 <details>
-<summary>output</summary>
+<summary>source</summary>
 
 ```shell
 # invoked by continuous integration servers to run tests
@@ -155,12 +179,29 @@ $ just console
 ```
 
 <details>
-<summary>output</summary>
+<summary>source</summary>
 
 ```shell
 # opens a console
 @console:
     echo "TODO: console"
+```
+
+</details>
+
+### docs recipe
+
+```shell
+$ just docs
+```
+
+<details>
+<summary>source</summary>
+
+```shell
+# updates our README when justfile changes
+@docs:
+    pipx run --spec cogapp cog -r README.md
 ```
 
 </details>
@@ -172,12 +213,29 @@ $ just fmt
 ```
 
 <details>
-<summary>output</summary>
+<summary>source</summary>
 
 ```shell
 # format and overwrite justfile
 @fmt:
     just --fmt --unstable
+```
+
+</details>
+
+### lint recipe
+
+```shell
+$ just lint
+```
+
+<details>
+<summary>source</summary>
+
+```shell
+# check/lint our project
+@lint:
+    pipx run --spec cogapp cog --check README.md
 ```
 
 </details>
@@ -189,7 +247,7 @@ $ just server
 ```
 
 <details>
-<summary>output</summary>
+<summary>source</summary>
 
 ```shell
 # starts app
@@ -206,7 +264,7 @@ $ just setup
 ```
 
 <details>
-<summary>output</summary>
+<summary>source</summary>
 
 ```shell
 # sets up a project to be used for the first time
@@ -223,7 +281,7 @@ $ just test
 ```
 
 <details>
-<summary>output</summary>
+<summary>source</summary>
 
 ```shell
 # runs tests
@@ -240,7 +298,7 @@ $ just update
 ```
 
 <details>
-<summary>output</summary>
+<summary>source</summary>
 
 ```shell
 # updates a project to run at its current version
