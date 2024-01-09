@@ -1,6 +1,6 @@
-# upate this if you to autoload .env file values
-
 set dotenv-load := false
+
+alias format := fmt
 
 # ------------------------------------------------------------
 #  Standard justfile recipes

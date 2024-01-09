@@ -33,6 +33,7 @@ Available recipes:
     console         # opens a console
     docs            # updates our README when justfile changes
     fmt             # format and overwrite justfile
+    format          # alias for `fmt`
     lint            # check/lint our project
     server          # starts app
     setup           # sets up a project to be used for the first time
