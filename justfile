@@ -18,7 +18,7 @@ alias format := fmt
 # ------------------------------------------------------------
 
 # installs/updates all dependencies
-@bootstrap *ARGS:
+bootstrap *ARGS:
     #!/usr/bin/env bash
 
     set -euo pipefail
