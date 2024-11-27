@@ -13,13 +13,11 @@ jobs:
     name: Test Just options
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 1
 
-      - uses: extractions/setup-just@v1
-        with:
-          just-version: 1.1.3
+      - uses: extractions/setup-just@v2
         env:
           # this is not required but add it if you get any rate limiting issues
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
