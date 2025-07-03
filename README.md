@@ -35,8 +35,7 @@ Available recipes:
     cibuild         # invoked by continuous integration servers to run tests
     console         # opens a console
     docs            # updates our README when justfile changes
-    fmt             # format and overwrite justfile
-    format          # alias for `fmt`
+    fmt             # format and overwrite justfile [alias: format]
     lint            # check/lint our project
     server          # starts app
     setup           # sets up a project to be used for the first time
@@ -114,30 +113,13 @@ $ just bootstrap
 
 ```shell
 # installs/updates all dependencies
-@bootstrap *ARGS:
+bootstrap *ARGS:
     #!/usr/bin/env bash
 
     set -euo pipefail
 
     # we use cogapp to update our README
-    pip install cogapp
-
-    # setup our project defaults if they exist
-    if [ ! -f ".env" ]; then
-        echo ".env created"
-        cp .env.example .env
-    fi
-
-    if [ ! -f "docker-compose.override.yml" ]; then
-        echo "docker-compose.override.yml created"
-        cp docker-compose.override.yml.example docker-compose.override.yml
-    fi
-
-    # [ ] uncomment if we are using Docker
-    # docker-compose {{ ARGS }} build --force-rm
-
-    # [ ] uncomment if we are using pre-commit
-    # python -m pip install --upgrade pre-commit
+    pip install --upgrade pip uv
 ```
 
 </details>
@@ -205,7 +187,7 @@ $ just docs
 ```shell
 # updates our README when justfile changes
 @docs:
-    pipx run --spec cogapp cog -r README.md
+    uvx --from cogapp cog -r README.md
 ```
 
 </details>
@@ -239,7 +221,7 @@ $ just lint
 ```shell
 # check/lint our project
 @lint:
-    pipx run --spec cogapp cog --check README.md
+    uvx --from cogapp cog --check README.md
 ```
 
 </details>

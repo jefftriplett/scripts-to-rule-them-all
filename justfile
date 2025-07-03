@@ -6,6 +6,7 @@ alias format := fmt
 #  Standard justfile recipes
 # ------------------------------------------------------------
 
+# show available recipes
 @_default:
     just --list
 
@@ -24,24 +25,7 @@ bootstrap *ARGS:
     set -euo pipefail
 
     # we use cogapp to update our README
-    pip install cogapp
-
-    # setup our project defaults if they exist
-    if [ ! -f ".env" ]; then
-        echo ".env created"
-        cp .env.example .env
-    fi
-
-    if [ ! -f "docker-compose.override.yml" ]; then
-        echo "docker-compose.override.yml created"
-        cp docker-compose.override.yml.example docker-compose.override.yml
-    fi
-
-    # [ ] uncomment if we are using Docker
-    # docker-compose {{ ARGS }} build --force-rm
-
-    # [ ] uncomment if we are using pre-commit
-    # python -m pip install --upgrade pre-commit
+    pip install --upgrade pip uv
 
 # invoked by continuous integration servers to run tests
 @cibuild:
@@ -57,7 +41,7 @@ bootstrap *ARGS:
 
 # check/lint our project
 @lint:
-    pipx run --spec cogapp cog --check README.md
+    uvx --from cogapp cog --check README.md
 
 # starts app
 @server:
@@ -81,4 +65,4 @@ bootstrap *ARGS:
 
 # updates our README when justfile changes
 @docs:
-    pipx run --spec cogapp cog -r README.md
+    uvx --from cogapp cog -r README.md
